@@ -17,6 +17,7 @@ import gtk
 from gettext import gettext as _
 import pynotify
 import time
+gtk.gdk.threads_init()
 
 class GNazar():
     def __init__(self):
@@ -57,7 +58,11 @@ class GNazar():
         self.total_attack = 0
         self.defated_attack = 0
 
-        self._notification()
+        import thread
+        thread.start_new_thread(self._notification, ())
+
+        # gtk main
+        gtk.main()
 
     '''
     show popup menu
@@ -68,10 +73,9 @@ class GNazar():
     # random notification
     def _notification(self):
         while(True):
-            time.sleep(5)
-            print "Oboooo"
+            #time.sleep(random.randrange(3600, 18000))
+            time.sleep(4) # testing
             self.notification()
-            self._notification()
 
     '''
     show about
@@ -150,6 +154,4 @@ class GNazar():
 
 if __name__ == "__main__":
     statusicon = GNazar()
-    gtk.main()
-    #threading.start_new_thread(gtk.main(), ())
     statusicon._notification()
