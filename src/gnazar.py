@@ -15,19 +15,24 @@
 import pygtk
 import gtk
 from gettext import gettext as _
+import pynotify
+import time
+import sched
+import thread
 
 class GNazar:
     def __init__(self):
         # create a new Status Icon
         self.gnazar = gtk.StatusIcon()
         self.gnazar.set_from_file("../icons/hi22-app-gnazar-deactive.png")
-        self.gnazar.set_tooltip(_("KNazar - You are completely demilitarized..."))
+        self.gnazar.set_tooltip(_("GNazar - You are completely demilitarized..."))
         self.gnazar.set_visible(True)
         self.status = False
 
         # create menu
         self.menu = gtk.Menu()
         self.gnazar.connect("popup_menu", self.show_menu)
+
         # connect
         _quit = gtk.ImageMenuItem(gtk.STOCK_QUIT)
         _quit.connect("activate", self.destroy)
@@ -39,12 +44,24 @@ class GNazar:
         _release = gtk.ImageMenuItem(gtk.STOCK_CANCEL)
         _release.set_label(_("Release"))
         _release.connect("activate", self.release)
+
         # add to menu
         self.menu.add(_protect)
         self.menu.add(_release)
         self.menu.add(_about)
         self.menu.add(_quit)
         self.menu.show_all()
+
+        # notification
+        pynotify.init(_("GNazar Application"))
+
+        # init attack
+        self.total_attack = 0
+        self.defated_attack = 0
+
+        # Scheduler
+        self.schedule = sched.scheduler(time.time, time.sleep)
+        thread.start_new_thread(self._notification, ())
         #gtk main
         gtk.main()
 
@@ -53,6 +70,12 @@ class GNazar:
     '''
     def show_menu(self, status_icon, button, activate_time):
         self.menu.popup(None, None, gtk.status_icon_position_menu, button, activate_time, status_icon)
+
+    # random notification
+    def _notification(self):
+        self.schedule.enter(5, 1, self.notification, ())
+        self.schedule.enter(6, 1, self._notification, ())
+        self.schedule.run()
 
     '''
     show about
@@ -89,7 +112,7 @@ class GNazar:
             dialog.connect('response', self.dialog_destroyer)
             dialog.show()
             self.status = True
-            self.gnazar.set_tooltip(_("KNazar - No harmful look allowed!"))
+            self.gnazar.set_tooltip(_("GNazar - No harmful look allowed!"))
             self.gnazar.set_from_file("../icons/hi22-app-gnazar.png")
 
     def release(self, widget):
@@ -105,8 +128,26 @@ class GNazar:
             dialog.connect('response', self.dialog_destroyer)
             dialog.show()
             self.status = False
-            self.gnazar.set_tooltip(_("KNazar - You are completely demilitarized..."))
+            self.gnazar.set_tooltip(_("GNazar - You are completely demilitarized..."))
             self.gnazar.set_from_file("../icons/hi22-app-gnazar-deactive.png")
+
+    def notification(self):
+        self.total_attack += 1
+        if self.status == True:
+            self.defated_attack += 1
+            title = _("Nazar eliminated")
+            body = _("Nazar Received and eliminated successfuly")
+            icon = "gtk-apply"
+        else:
+            title = _("Nazar harmed")
+            body = _("Nazar Received and it HARMED!")
+            icon = "dialog-warning"
+            self.gnazar.set_tooltip(_("GNazar - %s attacks received so far, %s are defated and %s are received...") %
+                                    (self.total_attack, self.defated_attack, self.total_attack - self.defated_attack))
+        pynotification = pynotify.Notification(title, body, icon)
+        pynotification.set_urgency(pynotify.URGENCY_NORMAL)
+        pynotification.set_timeout(pynotify.EXPIRES_NEVER)
+        pynotification.show()
 
     def dialog_destroyer(self, dialog, widget):
         dialog.destroy()
