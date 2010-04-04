@@ -58,6 +58,17 @@ class GNazar:
     '''
     def show_about(self, widget):
         print "Abooouuuuvvtt"
+        about = gtk.AboutDialog()
+        about.set_program_name("GNazar")
+        about.set_version("0.1")
+        about.set_copyright("(c) Aşkın Yollu")
+        about.set_comments(_("GNazar is a useful part of the Pardus Linux"))
+        about.set_website("http://www.askin.ws")
+        about.set_logo(gtk.gdk.pixbuf_new_from_file("../icons/hi32-app-gnazar.png"))
+        about.set_translator_credits("")
+        about.set_artists("")
+        about.run()
+        about.destroy()
 
     # destroy callback
     def destroy(self, widget):
@@ -94,7 +105,7 @@ class GNazar:
             dialog = gtk.MessageDialog(
                 parent         = None,
                 flags          = gtk.DIALOG_DESTROY_WITH_PARENT,
-                type           = gtk.MESSAGE_INFO,
+                type           = gtk.MESSAGE_WARNING,
                 buttons        = gtk.BUTTONS_OK,
                 message_format = _("GNazar is stopping to protect your Pardus Linux from harmful looks...")
                 )
