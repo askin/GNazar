@@ -20,7 +20,8 @@ class GNazar:
     def __init__(self):
         # create a new Status Icon
         self.gnazar = gtk.StatusIcon()
-        self.gnazar.set_from_file("../icons/hi22-app-gnazar.png")
+        self.gnazar.set_from_file("../icons/hi22-app-gnazar-deactive.png")
+        self.gnazar.set_tooltip(_("KNazar - You are completely demilitarized..."))
         self.gnazar.set_visible(True)
         self.status = False
 
@@ -74,17 +75,6 @@ class GNazar:
     def destroy(self, widget):
         gtk.main_quit()
 
-    '''
-    protect callback
-    '''
-    def protect(self, widget):
-        self.status = True
-        print "Protect"
-
-    def release(self, widget):
-        self.status = False
-        print "Don't Protect"
-
     # popup callback
     def protect(self, widget):
         if self.status == False:
@@ -99,6 +89,8 @@ class GNazar:
             dialog.connect('response', self.dialog_destroyer)
             dialog.show()
             self.status = True
+            self.gnazar.set_tooltip(_("KNazar - No harmful look allowed!"))
+            self.gnazar.set_from_file("../icons/hi22-app-gnazar.png")
 
     def release(self, widget):
         if self.status == True:
@@ -113,6 +105,8 @@ class GNazar:
             dialog.connect('response', self.dialog_destroyer)
             dialog.show()
             self.status = False
+            self.gnazar.set_tooltip(_("KNazar - You are completely demilitarized..."))
+            self.gnazar.set_from_file("../icons/hi22-app-gnazar-deactive.png")
 
     def dialog_destroyer(self, dialog, widget):
         dialog.destroy()
