@@ -82,7 +82,7 @@ class GNazar:
                 flags          = gtk.DIALOG_DESTROY_WITH_PARENT,
                 type           = gtk.MESSAGE_INFO,
                 buttons        = gtk.BUTTONS_OK,
-                message_format = _("KNazar is starting to protect your Pardus Linux from harmful looks...")
+                message_format = _("GNazar is starting to protect your Pardus Linux from harmful looks...")
                 )
             dialog.set_title(_("GNazar Application"))
             dialog.connect('response', self.dialog_destroyer)
@@ -96,7 +96,7 @@ class GNazar:
                 flags          = gtk.DIALOG_DESTROY_WITH_PARENT,
                 type           = gtk.MESSAGE_INFO,
                 buttons        = gtk.BUTTONS_OK,
-                message_format = _("KNazar is stopping to protect your Pardus Linux from harmful looks...")
+                message_format = _("GNazar is stopping to protect your Pardus Linux from harmful looks...")
                 )
             dialog.set_title(_("GNazar Application"))
             dialog.connect('response', self.dialog_destroyer)
