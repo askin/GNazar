@@ -14,10 +14,18 @@
 
 import pygtk
 import gtk
-from gettext import gettext as _
+import gettext
 import pynotify
 import time
+import os, sys, locale
 gtk.gdk.threads_init()
+
+#Translation stuff
+localedir = "/usr/share/locale"
+gettext.bindtextdomain('gnazar', localedir)
+gettext.textdomain('gnazar')
+
+_ = gettext.gettext
 
 class GNazar():
     def __init__(self):
@@ -58,11 +66,10 @@ class GNazar():
         self.total_attack = 0
         self.defated_attack = 0
 
+        self.running = True
+
         import thread
         thread.start_new_thread(self._notification, ())
-
-        # gtk main
-        gtk.main()
 
     '''
     show popup menu
@@ -72,7 +79,7 @@ class GNazar():
 
     # random notification
     def _notification(self):
-        while(True):
+        while(self.running):
             #time.sleep(random.randrange(3600, 18000))
             time.sleep(4) # testing
             self.notification()
@@ -96,6 +103,8 @@ class GNazar():
 
     # destroy callback
     def destroy(self, widget):
+        self.gnazar.set_visible(False)
+        self.running = False
         gtk.main_quit()
 
     # popup callback
@@ -154,4 +163,6 @@ class GNazar():
 
 if __name__ == "__main__":
     statusicon = GNazar()
+    # gtk main
+    gtk.main()
     statusicon._notification()
