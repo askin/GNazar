@@ -17,10 +17,8 @@ import gtk
 from gettext import gettext as _
 import pynotify
 import time
-import sched
-import thread
 
-class GNazar:
+class GNazar():
     def __init__(self):
         # create a new Status Icon
         self.gnazar = gtk.StatusIcon()
@@ -59,11 +57,7 @@ class GNazar:
         self.total_attack = 0
         self.defated_attack = 0
 
-        # Scheduler
-        self.schedule = sched.scheduler(time.time, time.sleep)
-        thread.start_new_thread(self._notification, ())
-        #gtk main
-        gtk.main()
+        self._notification()
 
     '''
     show popup menu
@@ -73,9 +67,11 @@ class GNazar:
 
     # random notification
     def _notification(self):
-        self.schedule.enter(5, 1, self.notification, ())
-        self.schedule.enter(6, 1, self._notification, ())
-        self.schedule.run()
+        while(True):
+            time.sleep(5)
+            print "Oboooo"
+            self.notification()
+            self._notification()
 
     '''
     show about
@@ -144,13 +140,16 @@ class GNazar:
             icon = "dialog-warning"
             self.gnazar.set_tooltip(_("GNazar - %s attacks received so far, %s are defated and %s are received...") %
                                     (self.total_attack, self.defated_attack, self.total_attack - self.defated_attack))
-        pynotification = pynotify.Notification(title, body, icon)
-        pynotification.set_urgency(pynotify.URGENCY_NORMAL)
-        pynotification.set_timeout(pynotify.EXPIRES_NEVER)
-        pynotification.show()
+        notify = pynotify.Notification(title, body, icon)
+        notify.set_urgency(pynotify.URGENCY_NORMAL)
+        notify.set_timeout(pynotify.EXPIRES_NEVER)
+        notify.show()
 
     def dialog_destroyer(self, dialog, widget):
         dialog.destroy()
 
 if __name__ == "__main__":
     statusicon = GNazar()
+    gtk.main()
+    #threading.start_new_thread(gtk.main(), ())
+    statusicon._notification()
