@@ -88,7 +88,6 @@ class GNazar():
     show about
     '''
     def show_about(self, widget):
-        print "Abooouuuuvvtt"
         about = gtk.AboutDialog()
         about.set_program_name("GNazar")
         about.set_version("0.1")
@@ -96,8 +95,8 @@ class GNazar():
         about.set_comments(_("GNazar is a useful part of the Pardus Linux"))
         about.set_website("http://www.askin.ws")
         about.set_logo(gtk.gdk.pixbuf_new_from_file("../icons/hi32-app-gnazar.png"))
-        about.set_translator_credits("")
-        about.set_artists("")
+        about.set_translator_credits(_("TRANSLATORS"))
+        about.set_artists([_("THANKSFORICONS")])
         about.run()
         about.destroy()
 
