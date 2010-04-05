@@ -46,11 +46,11 @@ def __mybuild(build):
 
 # setup
 datas = [('', ['README', 'COPYING', 'AUTHORS', 'ChangeLog']),
-         ('applications', ['data/gnazar.desktop']),
-         ('icons/hicolor/32x32/apps', ['data/icons/hicolors/32x32/apps/gnazar.png']),
-         ('icons/hicolor/22x22/apps', ['data/icons/hicolors/22x22/apps/gnazar.png']),
-         ('icons/hicolor/22x22/apps', ['data/icons/hicolors/22x22/apps/gnazar-deactive.png']),
-         ('icons/hicolor/16x16/apps', ['data/icons/hicolors/16x16/apps/gnazar.png']),
+         ('/usr/share/applications', ['data/gnazar.desktop']),
+         ('/usr/share/icons/hicolor/32x32/apps', ['data/icons/hicolors/32x32/apps/gnazar.png']),
+         ('/usr/share/icons/hicolor/22x22/apps', ['data/icons/hicolors/22x22/apps/gnazar.png']),
+         ('/usr/share/icons/hicolor/22x22/apps', ['data/icons/hicolors/22x22/apps/gnazar-deactive.png']),
+         ('/usr/share/icons/hicolor/16x16/apps', ['data/icons/hicolors/16x16/apps/gnazar.png']),
          ('locale', glob.glob('data/locale/*.*')),
          ('locale/tr/LC_MESSAGES', glob.glob('data/locale/tr/LC_MESSAGES/*.*')),
          ('locale/en/LC_MESSAGES', glob.glob('data/locale/en/LC_MESSAGES/*.*'))]
