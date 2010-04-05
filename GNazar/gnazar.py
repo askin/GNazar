@@ -21,7 +21,7 @@ import os, sys, locale
 gtk.gdk.threads_init()
 
 #Translation stuff
-localedir = "/usr/share/locale"
+localedir = "/usr/share/gnazar/locale"
 gettext.bindtextdomain('gnazar', localedir)
 gettext.textdomain('gnazar')
 sharedirs = '/usr/share/gnazar'
@@ -32,7 +32,7 @@ class GNazar():
     def __init__(self):
         # create a new Status Icon
         self.gnazar = gtk.StatusIcon()
-        self.gnazar.set_from_file("%s/icons/hi22-app-gnazar-deactive.png" % sharedirs)
+        self.gnazar.set_from_file('%s/icons/hicolor/22x22/apps/gnazar-deactive.png' % sharedirs)
         self.gnazar.set_tooltip(_("GNazar - You are completely demilitarized..."))
         self.gnazar.set_visible(True)
         self.status = False
@@ -72,6 +72,10 @@ class GNazar():
         import thread
         thread.start_new_thread(self._notification, ())
 
+    def main(self):
+        # gtk main
+        gtk.main()
+
     '''
     show popup menu
     '''
@@ -95,7 +99,7 @@ class GNazar():
         about.set_copyright("(c) Aşkın Yollu")
         about.set_comments(_("GNazar is a useful part of the Pardus Linux"))
         about.set_website("http://www.askin.ws")
-        about.set_logo(gtk.gdk.pixbuf_new_from_file("%s/icons/hi32-app-gnazar.png" % sharedirs))
+        about.set_logo(gtk.gdk.pixbuf_new_from_file("%s/icons/hicolor/32x32/apps/gnazar.png" % sharedirs))
         about.set_translator_credits(_("TRANSLATORS"))
         about.set_artists([_("THANKSFORICONS")])
         about.run()
@@ -122,7 +126,7 @@ class GNazar():
             dialog.show()
             self.status = True
             self.gnazar.set_tooltip(_("GNazar - No harmful look allowed!"))
-            self.gnazar.set_from_file("%s/icons/hi22-app-gnazar.png" % sharedirs)
+            self.gnazar.set_from_file("%s/icons/hicolor/22x22/apps/gnazar.png" % sharedirs)
 
     def release(self, widget):
         if self.status == True:
@@ -138,7 +142,7 @@ class GNazar():
             dialog.show()
             self.status = False
             self.gnazar.set_tooltip(_("GNazar - You are completely demilitarized..."))
-            self.gnazar.set_from_file("%s/icons/hi22-app-gnazar-deactive.png" % sharedirs)
+            self.gnazar.set_from_file("%s/icons/hicolor/22x22/apps/gnazar-deactive.png" % sharedirs)
 
     def notification(self):
         self.total_attack += 1
@@ -161,8 +165,6 @@ class GNazar():
     def dialog_destroyer(self, dialog, widget):
         dialog.destroy()
 
-if __name__ == "__main__":
-    statusicon = GNazar()
-    # gtk main
-    gtk.main()
-    statusicon._notification()
+def main():
+    si = GNazar()
+    si.main()
