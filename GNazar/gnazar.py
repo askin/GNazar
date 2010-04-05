@@ -25,7 +25,7 @@ gtk.gdk.threads_init()
 localedir = "/usr/share/gnazar/locale"
 gettext.bindtextdomain('gnazar', localedir)
 gettext.textdomain('gnazar')
-sharedirs = '/usr/share/gnazar'
+sharedirs = '/usr/share'
 
 _ = gettext.gettext
 
@@ -86,8 +86,8 @@ class GNazar():
     # random notification
     def _notification(self):
         while(self.running):
-            time.sleep(random.randrange(3600, 18000))
-            # time.sleep(4) # testing
+            #time.sleep(random.randrange(3600, 18000))
+            time.sleep(4) # testing
             self.notification()
 
     '''
