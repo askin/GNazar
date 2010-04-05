@@ -18,6 +18,7 @@ import gettext
 import pynotify
 import time
 import os, sys, locale
+import random
 gtk.gdk.threads_init()
 
 #Translation stuff
@@ -85,8 +86,8 @@ class GNazar():
     # random notification
     def _notification(self):
         while(self.running):
-            #time.sleep(random.randrange(3600, 18000))
-            time.sleep(4) # testing
+            time.sleep(random.randrange(3600, 18000))
+            # time.sleep(4) # testing
             self.notification()
 
     '''
