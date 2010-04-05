@@ -1,0 +1,81 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: GNazar tr\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-05 00:08+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Aşkın Yollu <askin@askin.ws>\n"
+"Language-Team: tr <askin@askin.ws>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/gnazar.py:35
+#: src/gnazar.py:140
+msgid "GNazar - You are completely demilitarized..."
+msgstr "GNazar - Tamamen silahsızsınız..."
+
+#: src/gnazar.py:50
+msgid "Protect"
+msgstr "Koru"
+
+#: src/gnazar.py:52
+msgid "Release"
+msgstr "Koruma"
+
+#: src/gnazar.py:63
+#: src/gnazar.py:120
+#: src/gnazar.py:136
+msgid "GNazar Application"
+msgstr "GTK Nazar Uygulaması"
+
+#: src/gnazar.py:96
+msgid "GNazar is a useful part of the Pardus Linux"
+msgstr "GNazar Pardus Linux'un çok önemli bir parçasıdır."
+
+#: src/gnazar.py:99
+msgid "TRANSLATORS"
+msgstr ""
+"S.Çağlar Onur - caglar@pardus.org.tr\n"
+"Uğur Çetin - jnmbk@users.sourceforge.net"
+
+#: src/gnazar.py:100
+msgid "THANKSFORICONS"
+msgstr ""
+"Serdar Soytetir\n"
+"    tulliana@gmail.com\n"
+"    (GNazar)KNazar Simgesi"
+
+#: src/gnazar.py:118
+msgid "GNazar is starting to protect your Pardus Linux from harmful looks..."
+msgstr "GNazar Pardus Linux'u kem gözlerden korumaya başlıyor..."
+
+#: src/gnazar.py:124
+msgid "GNazar - No harmful look allowed!"
+msgstr "GNazar - Kem gözlere izin verilmiyor!"
+
+#: src/gnazar.py:134
+msgid "GNazar is stopping to protect your Pardus Linux from harmful looks..."
+msgstr "GNazar Pardus Linux'u kem gözlerden korumayı BIRAKIYOR..."
+
+#: src/gnazar.py:147
+msgid "Nazar eliminated"
+msgstr "Nazardan korunuldu"
+
+#: src/gnazar.py:148
+msgid "Nazar Received and eliminated successfuly"
+msgstr "Nazar oldu ve başarı ile icabına bakıldı"
+
+#: src/gnazar.py:151
+msgid "Nazar harmed"
+msgstr "Nazar değdi"
+
+#: src/gnazar.py:152
+msgid "Nazar Received and it HARMED!"
+msgstr "Nazar oldu ama hazırlıksız yakalandık"
+
+#: src/gnazar.py:154
+#, python-format
+msgid "GNazar - %s attacks received so far, %s are defated and %s are received..."
+msgstr "KNazar - Şimdiye kadar %s atak oldu, %s tanesinden etkilenilmedi, %s tanesi ise hazırlıksız yakaladı..."
+
