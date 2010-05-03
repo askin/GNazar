@@ -86,8 +86,8 @@ class GNazar():
     # random notification
     def _notification(self):
         while(self.running):
-            #time.sleep(random.randrange(3600, 18000))
-            time.sleep(4) # testing
+            time.sleep(random.randrange(3600, 18000))
+            #time.sleep(4) # testing
             self.notification()
 
     '''
@@ -96,6 +96,7 @@ class GNazar():
     def show_about(self, widget):
         about = gtk.AboutDialog()
         about.set_program_name("GNazar")
+        about.set_icon_from_file("%s/icons/hicolor/22x22/apps/gnazar.png" % sharedirs)
         about.set_version("0.1")
         about.set_copyright("(c) Aşkın Yollu")
         about.set_comments(_("GNazar is a useful part of the Pardus Linux"))

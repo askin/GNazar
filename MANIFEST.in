@@ -1,0 +1,3 @@
+include README AUTHORS COPYING ChangeLog
+recursive-include GNazar *
+recursive-include data *
