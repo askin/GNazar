@@ -30,8 +30,8 @@ msgid "GNazar Application"
 msgstr "GTK Nazar Uygulaması"
 
 #: src/gnazar.py:96
-msgid "GNazar is a useful part of the Pardus Linux"
-msgstr "GNazar Pardus Linux'un çok önemli bir parçasıdır."
+msgid "GNazar is a useful part of the %s distro."
+msgstr "GNazar %s dağıtımının çok önemli bir parçasıdır."
 
 #: src/gnazar.py:99
 msgid "TRANSLATORS"
@@ -47,16 +47,16 @@ msgstr ""
 "    (GNazar)KNazar Simgesi"
 
 #: src/gnazar.py:118
-msgid "GNazar is starting to protect your Pardus Linux from harmful looks..."
-msgstr "GNazar Pardus Linux'u kem gözlerden korumaya başlıyor..."
+msgid "GNazar is starting to protect your linux distro from harmful looks..."
+msgstr "GNazar kullandığınız dağıtımı kem gözlerden korumaya başlıyor..."
 
 #: src/gnazar.py:124
 msgid "GNazar - No harmful look allowed!"
 msgstr "GNazar - Kem gözlere izin verilmiyor!"
 
 #: src/gnazar.py:134
-msgid "GNazar is stopping to protect your Pardus Linux from harmful looks..."
-msgstr "GNazar Pardus Linux'u kem gözlerden korumayı BIRAKIYOR..."
+msgid "GNazar is stopping to protect your computer from harmful looks..."
+msgstr "GNazar bilgisayarınızı kem gözlerden korumayı BIRAKIYOR..."
 
 #: src/gnazar.py:147
 msgid "Nazar eliminated"
@@ -77,5 +77,4 @@ msgstr "Nazar oldu ama hazırlıksız yakalandık"
 #: src/gnazar.py:154
 #, python-format
 msgid "GNazar - %s attacks received so far, %s are defated and %s are received..."
-msgstr "KNazar - Şimdiye kadar %s atak oldu, %s tanesinden etkilenilmedi, %s tanesi ise hazırlıksız yakaladı..."
-
+msgstr "GNazar - Şimdiye kadar %s atak oldu, %s tanesinden etkilenilmedi, %s tanesi ise hazırlıksız yakaladı..."

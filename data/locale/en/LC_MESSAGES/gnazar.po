@@ -30,8 +30,8 @@ msgid "GNazar Application"
 msgstr "GNazar Application"
 
 #: src/gnazar.py:96
-msgid "GNazar is a useful part of the Pardus Linux"
-msgstr "GNazar is a useful part of the Pardus Linux"
+msgid "GNazar is a useful part of the %s distro"
+msgstr "GNazar is a useful part of the %s distro"
 
 #: src/gnazar.py:99
 msgid "TRANSLATORS"
@@ -46,16 +46,16 @@ msgstr ""
 "    tulliana@gmail.com    KNazar Icon"
 
 #: src/gnazar.py:118
-msgid "GNazar is starting to protect your Pardus Linux from harmful looks..."
-msgstr "GNazar is starting to protect your Pardus Linux from harmful looks..."
+msgid "GNazar is starting to protect your computer from harmful looks..."
+msgstr "GNazar is starting to protect your computer from harmful looks..."
 
 #: src/gnazar.py:124
 msgid "GNazar - No harmful look allowed!"
 msgstr "GNazar - No harmful look allowed!"
 
 #: src/gnazar.py:134
-msgid "GNazar is stopping to protect your Pardus Linux from harmful looks..."
-msgstr "GNazar is stopping to protect your Pardus Linux from harmful looks..."
+msgid "GNazar is stopping to protect your computer from harmful looks..."
+msgstr "GNazar is stopping to protect your computer from harmful looks..."
 
 #: src/gnazar.py:147
 msgid "Nazar eliminated"
@@ -77,4 +77,3 @@ msgstr "Nazar Received and it HARMED!"
 #, python-format
 msgid "GNazar - %s attacks received so far, %s are defated and %s are received..."
 msgstr "GNazar - %s attacks received so far, %s are defated and %s are received..."
-

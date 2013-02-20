@@ -19,6 +19,7 @@ import pynotify
 import time
 import os, sys, locale
 import random
+import platform
 gtk.gdk.threads_init()
 
 #Translation stuff
@@ -99,7 +100,9 @@ class GNazar():
         about.set_icon_from_file("%s/icons/hicolor/22x22/apps/gnazar.png" % sharedirs)
         about.set_version("0.1")
         about.set_copyright("(c) Aşkın Yollu")
-        about.set_comments(_("GNazar is a useful part of the Pardus Linux"))
+        # FIXME: make it generic (mac, bsd, win etc..)
+        dist_name = platform.dist()[0]
+        about.set_comments(_("GNazar is a useful part of the %s" % dist_name))
         about.set_website("http://www.askin.ws")
         about.set_logo(gtk.gdk.pixbuf_new_from_file("%s/icons/hicolor/32x32/apps/gnazar.png" % sharedirs))
         about.set_translator_credits(_("TRANSLATORS"))
@@ -121,7 +124,7 @@ class GNazar():
                 flags          = gtk.DIALOG_DESTROY_WITH_PARENT,
                 type           = gtk.MESSAGE_INFO,
                 buttons        = gtk.BUTTONS_OK,
-                message_format = _("GNazar is starting to protect your Pardus Linux from harmful looks...")
+                message_format = _("GNazar is starting to protect your computer from harmful looks...")
                 )
             dialog.set_title(_("GNazar Application"))
             dialog.connect('response', self.dialog_destroyer)
@@ -137,7 +140,7 @@ class GNazar():
                 flags          = gtk.DIALOG_DESTROY_WITH_PARENT,
                 type           = gtk.MESSAGE_WARNING,
                 buttons        = gtk.BUTTONS_OK,
-                message_format = _("GNazar is stopping to protect your Pardus Linux from harmful looks...")
+                message_format = _("GNazar is stopping to protect your computer from harmful looks...")
                 )
             dialog.set_title(_("GNazar Application"))
             dialog.connect('response', self.dialog_destroyer)
