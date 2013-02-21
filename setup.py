@@ -13,58 +13,97 @@
 #
 
 from distutils.core import setup
-import glob
+from distutils import cmd
+from distutils.command.install_data import install_data as _install_data
+from distutils.command.build import build as _build
+from distutils.command.install import install as _install
 
-# it is useless when i find a way to compile po files
-'''
-import os, shutil, sys
-from distutils.command.build import build
-from distutils.command.clean import clean
+import msgfmt
+import os
 
-try:
-    import pygtk
-except:
-    print "\033[31mWarning: You have to install PyGtk on your system\033[0m"
 
-try:
-    import pynotify
-except:
-    print "\033[31mWarning: You have to install PyNotify on your system\033[0m"
+class build_trans(cmd.Command):
+    description = 'Compile .po files into .mo files'
+    user_options = []
 
-def compile_po(source, target):
-    pass
+    def initialize_options(self):
+        pass
 
-def myclean(clean):
-    shutil.rmtree('locale')
+    def finalize_options(self):
+        pass
 
-def __mybuild(build):
-    os.mkdir('locale')
-    langs = ['tr', 'en']
-    for i lang in langs:
-        compile_po('po/gnazar-%s.po' % lang, 'locale/%s/LC_MESSAGES/gnazar.mo' % lang)
-'''
+    def run(self):
+        po_dir = os.path.join(os.path.dirname(os.curdir), 'data/locale')
+        for path, names, filenames in os.walk(po_dir):
+            for f in filenames:
+                if f.endswith('.po'):
+                    lang = f[:-3]
+                    src = os.path.join(path, f)
+                    dest_path = os.path.join('build', 'locale',
+                                             lang, 'LC_MESSAGES')
+                    dest = os.path.join(dest_path, 'gnazar.mo')
+                    if not os.path.exists(dest_path):
+                        os.makedirs(dest_path)
+                    if not os.path.exists(dest):
+                        print 'Compiling %s' % src
+                        msgfmt.make(src, dest)
+                    else:
+                        src_mtime = os.stat(src)[8]
+                        dest_mtime = os.stat(dest)[8]
+                        if src_mtime > dest_mtime:
+                            print 'Compiling %s' % src
+                            msgfmt.make(src, dest)
 
-# setup
+
+class build(_build):
+    sub_commands = _build.sub_commands + [('build_trans', None)]
+
+    def run(self):
+        _build.run(self)
+
+
+class install_data(_install_data):
+
+    def run(self):
+        for lang in os.listdir('build/locale/'):
+            lang_dir = os.path.join('..', 'locale', lang, 'LC_MESSAGES')
+            lang_file = os.path.join('build', 'locale', lang,
+                                     'LC_MESSAGES', 'gnazar.mo')
+            self.data_files.append((lang_dir, [lang_file]))
+        _install_data.run(self)
+
+
+cmdclass = {
+    'build': build,
+    'build_trans': build_trans,
+    'install_data': install_data
+}
+
+
 datas = [('', ['README', 'COPYING', 'AUTHORS', 'ChangeLog']),
-         ('/usr/share/applications', ['data/gnazar.desktop']),
-         ('/usr/share/icons/hicolor/32x32/apps', ['data/icons/hicolors/32x32/apps/gnazar.png']),
-         ('/usr/share/icons/hicolor/22x22/apps', ['data/icons/hicolors/22x22/apps/gnazar.png']),
-         ('/usr/share/icons/hicolor/22x22/apps', ['data/icons/hicolors/22x22/apps/gnazar-deactive.png']),
-         ('/usr/share/icons/hicolor/16x16/apps', ['data/icons/hicolors/16x16/apps/gnazar.png']),
-         ('locale', glob.glob('data/locale/*.*')),
-         ('locale/tr/LC_MESSAGES', glob.glob('data/locale/tr/LC_MESSAGES/*.*')),
-         ('locale/en/LC_MESSAGES', glob.glob('data/locale/en/LC_MESSAGES/*.*'))]
-
-setup(name = 'GNazar',
-      version = '0.1',
-      description = 'GTK Nazar Aplication',
-      author = 'Aşkın Yollu',
-      author_email = 'askin@askin.ws',
-      license = 'GNU General Public License, Version 2',
-      url = 'http://askin.ws',
-      packages = ['GNazar'],
-      data_files = datas,
-      scripts = ['gnazar'],
-)
+         ('../applications', ['data/gnazar.desktop']),
+         ('../icons/hicolor/32x32/apps',
+          ['data/icons/hicolors/32x32/apps/gnazar.png']),
+         ('../icons/hicolor/22x22/apps',
+          ['data/icons/hicolors/22x22/apps/gnazar.png']),
+         ('../icons/hicolor/22x22/apps',
+          ['data/icons/hicolors/22x22/apps/gnazar-deactive.png']),
+         ('../icons/hicolor/16x16/apps',
+          ['data/icons/hicolors/16x16/apps/gnazar.png']),
+         ('../locale/tr/LC_MESSAGES',
+          ['build/locale/en/LC_MESSAGES/gnazar.mo']),
+         ('../locale/en/LC_MESSAGES',
+          ['build/locale/en/LC_MESSAGES/gnazar.mo'])]
 
 
+setup(name='GNazar',
+      version='0.1',
+      description='GTK Nazar Aplication',
+      author='Aşkın Yollu',
+      author_email='askin@askin.ws',
+      license='GNU General Public License, Version 2',
+      url='http://askin.ws',
+      packages=['GNazar'],
+      data_files=datas,
+      scripts=['gnazar'],
+      cmdclass=cmdclass)
