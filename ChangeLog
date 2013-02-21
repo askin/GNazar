@@ -1,0 +1,3 @@
+ * 2013-02-21
+   * Recode setup.py
+   * Data directories are not hardcoded
